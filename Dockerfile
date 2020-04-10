@@ -7,6 +7,7 @@ WORKDIR /app
 COPY requirements.txt ./
 
 RUN pip install -r requirements.txt
+RUN apt-get install python3-tk
 
 # Bundle app source
 COPY . /app

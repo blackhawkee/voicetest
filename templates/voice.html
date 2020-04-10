@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>VoiceSens Web Applicaiton</title>
+  <title>VoiceBiometric Web Portal</title>
   <link rel="stylesheet" type="text/css" href="../static/stylesheets/semantic.min.css" />
   <link rel="stylesheet" type="text/css" href="../static/stylesheets/example.css" />
 
@@ -14,7 +14,7 @@
     <div id="mainForm" class="ui large form">
       <h2 class="ui center aligned icon header loginText">
         <img src="{{ url_for('static', filename='images/makefg.png')}}" class="ui circular icon loginLogo">
-        VoiceSens Sample Web Application
+        VoiceBiometric Web Portal
       </h2>
 
       <div class="ui segment secondColor">
@@ -89,8 +89,8 @@
           <p>This could be because of the following reasons:
             <ul class="list">
               <li>The words you have spoken aren't entirely correct</li>
-              <li>IBM Speech to Text could not understand the audio.</li>
-              <li>Could not request results from IBM Speech to Text service.</li>
+              <li>Google Speech to Text could not understand the audio.</li>
+              <li>Could not request results from Google Speech to Text service.</li>
             </ul>
           </p>
         </div>       
@@ -113,12 +113,13 @@
 
     </div>
   </div>
-
+  <!--
   <div class="ui inverted vertical footer segment form-page">
     <div class="ui center aligned container">
-      - VoiceSens by Bedang Sen -
+      - VoiceSens - TESTING -
     </div>
   </div>
+  -->
 </body>
 
 <script src="https://unpkg.com/wavesurfer.js"></script>

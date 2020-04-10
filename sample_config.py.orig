@@ -1,0 +1,3 @@
+# recognize speech using IBM Speech to Text
+APIKEY = "9hjmbImc0pHxrRihlFzcUd995rJqPasD6S49xbjBtvUY"  
+URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/3e054090-edd6-45cd-8e1f-f1ebd4e385f7" 

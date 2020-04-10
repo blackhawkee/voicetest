@@ -15,12 +15,16 @@ import os                                               # For creating directori
 import shutil                                           # For deleting directories
 # from collections import defaultdict
 
+##import matplotlib
+##matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as plt
 import numpy
 import scipy.cluster
 import scipy.io.wavfile
 # For the speech detection alogrithms
 import speech_recognition
+import speech_recognition as sr
 # For the fuzzy matching algorithms
 from fuzzywuzzy import fuzz
 # For using the MFCC feature selection
@@ -192,15 +196,38 @@ def voice():
         f.write(request.data)
         f.close()
 
-        with open(filename_wav, 'rb') as audio_file:
-             recognised_words = speech_to_text.recognize(audio_file, content_type='audio/wav').get_result()
+        ### My code start
+        r = sr.Recognizer()
+        """"
+        #### Microphone added
+        my_mic = sr.Microphone()
+        with my_mic as source:
+             audio = r.listen(source)
 
-        recognised_words = str(recognised_words['results'][0]['alternatives'][0]['transcript'])
+        filename_wav = user_directory + "-".join(random_words) + '.wav'
+        f = open(filename_wav, 'wb')
+        f.write(audio)
+        f.close()
+        """
+        with sr.AudioFile(open(filename_wav, 'rb')) as source:
+             audio_data = r.record(source)
+             recognised_words = r.recognize_google(audio_data)
+             print("Google recognised words : " + recognised_words)
+#             audio_data = speech_recognition.Recognizer().record(source, duration=5)
+#             recognised_words = speech_recognition.Recognizer().recognize_google(request.data)
+        ### My code end
+
+#        with open(filename_wav, 'rb') as audio_file:
+#             recognised_words = speech_recognition.Recognizer().recognize_google(request.data)
+	##speech_recognition.Recognizer().recognize_google(audio_file)
+             ##recognised_words = speech_to_text.recognize(audio_file, content_type='audio/wav').get_result()
+
+##        recognised_words = str(recognised_words['results'][0]['alternatives'][0]['transcript'])
         
 
-        print("IBM Speech to Text thinks you said : " + recognised_words)
-        print("IBM Fuzzy partial score : " + str(fuzz.partial_ratio(random_words, recognised_words)))
-        print("IBM Fuzzy score : " + str(fuzz.ratio(random_words, recognised_words)))       
+        print("Google Speech to Text thinks you said : " + recognised_words)
+        print("Google Fuzzy partial score : " + str(fuzz.partial_ratio(random_words, recognised_words)))
+        print("Google Fuzzy score : " + str(fuzz.ratio(random_words, recognised_words)))       
 
         if fuzz.ratio(random_words, recognised_words) < 65:
             print(

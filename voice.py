@@ -26,7 +26,7 @@ import scipy.io.wavfile
 import speech_recognition
 import speech_recognition as sr
 # For the fuzzy matching algorithms
-from fuzzywuzzy import fuzz
+from rapidfuzz import fuzz
 # For using the MFCC feature selection
 from python_speech_features import mfcc
 # For generating random words
@@ -229,7 +229,7 @@ def voice():
         print("Google Fuzzy partial score : " + str(fuzz.partial_ratio(random_words, recognised_words)))
         print("Google Fuzzy score : " + str(fuzz.ratio(random_words, recognised_words)))       
 
-        if fuzz.ratio(random_words, recognised_words) < 65:
+        if not fuzz.ratio(random_words, recognised_words, score_cutoff=65):
             print(
                 "\nThe words you have spoken aren't entirely correct. Please try again ...")
             os.remove(filename_wav)
